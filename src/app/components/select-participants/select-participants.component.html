@@ -1,0 +1,12 @@
+<div class="select-participant">
+      <span class="select-participant__label">{{ type | capitalizeFirst }}</span>
+      <div>
+            <button (click)="handleChangeNumberOfParticipant('decrease')" class="select-participant__wrap-icon">
+                  <img class="select-participant__icon" alt="" src="../../../assets/icons/minus.svg" />
+            </button>
+            <span class="select-participant__value">{{ numberOfParticipant }}</span>
+            <button (click)="handleChangeNumberOfParticipant('increate')" class="select-participant__wrap-icon">
+                  <img class="select-participant__icon" alt="" src="../../../assets/icons/plus.svg" />
+            </button>
+      </div>
+</div>

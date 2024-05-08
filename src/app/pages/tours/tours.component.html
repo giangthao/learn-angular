@@ -1,0 +1,592 @@
+<default-layout>
+   <main class="tour">
+      <div class="tour__wrapper-filter">
+         <div class="tour__back-ground"></div>
+         <div class="tour__form container">
+            <div class="tour__form-inner">
+               <form #filterForm="ngForm" (submit)="onSubmitFormFilter()">
+                  <!-- Serach -->
+                  <div class="tour__form-search">
+                     <img alt="" src="../../../assets/icons/search.svg" class="search-icon" />
+                     <input
+                        type="text"
+                        placeholder="Search tour"
+                        [(ngModel)]="seachValue"
+                        (input)="onSearchValueChange()"
+                        [ngModelOptions]="{ standalone: true }"
+                     />
+                     <img
+                        *ngIf="seachValue !== ''"
+                        alt=""
+                        src="../../../assets/icons/x.svg"
+                        class="x-icon"
+                        (click)="clearSearchValue()"
+                     />
+                  </div>
+                  <!-- Filters -->
+                  <div class="tour__filter-details">
+                     <div class="tour__filter-list" id="filter-form">
+                        <!-- Sort -->
+                        <div
+                           class="tour__filter-component"
+                           appClickOutside
+                           (clickOutside)="handlerClickOutside('sort_by')"
+                        >
+                           <button class="tour__filter-btn" [class.choosen]="sortColumn && sortColumn.trim() !== ''">
+                              <div class="tour__filter-inner-btn" (click)="toggleShowOptionsFiltering('sort_by')">
+                                 <img alt="" src="../../../assets/icons/document.svg" class="filter-icon" />
+
+                                 <span *ngIf="sortColumn && sortColumn.trim() !== ''; else labelSortBy">
+                                    {{ setSortByToString(sortColumn, sortSeq) }}
+                                 </span>
+                                 <ng-template #labelSortBy>
+                                    <span>Sort by </span>
+                                 </ng-template>
+                              </div>
+
+                              <button
+                                 *ngIf="sortColumn && sortColumn.trim() !== ''"
+                                 class="tour__filter-clear-btn"
+                                 (click)="clearSort()"
+                              >
+                                 <img alt="" src="../../../assets/icons/x.svg" class="x-icon small" />
+                              </button>
+                           </button>
+                           <div
+                              class="filter-popper"
+                              [class.show]="isShowOptionsFilter === true && typeFilter === 'sort_by'"
+                              *ngIf="isShowOptionsFilter === true && typeFilter === 'sort_by'"
+                           >
+                              <div class="filter-popper__inner">
+                                 <div class="filter-popper__list">
+                                    <div
+                                       (click)="setSortBy('like')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'like' && sortSeq === 'desc'"
+                                    >
+                                       Most Favourite
+                                    </div>
+                                    <div
+                                       (click)="setSortBy('budget', 'asc')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'budget' && sortSeq === 'asc'"
+                                    >
+                                       Budget ascending
+                                    </div>
+                                    <div
+                                       (click)="setSortBy('budget', 'desc')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'budget' && sortSeq === 'desc'"
+                                    >
+                                       Budget descending
+                                    </div>
+                                    <div
+                                       (click)="setSortBy('updated_at')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'updated_at'"
+                                    >
+                                       Modification date
+                                    </div>
+                                    <div
+                                       (click)="setSortBy('created_at')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'created_at'"
+                                    >
+                                       Creation date
+                                    </div>
+                                    <div
+                                       (click)="setSortBy('location')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'location'"
+                                    >
+                                       Location
+                                    </div>
+                                    <div
+                                       (click)="setSortBy('number_of_booking')"
+                                       class="filter-popper__item sort"
+                                       [class.active]="sortColumn === 'number_of_booking'"
+                                    >
+                                       Number of booking
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Date Range -->
+                        <div
+                           appClickOutside
+                           (clickOutside)="handlerClickOutside('date')"
+                           class="tour__filter-component"
+                        >
+                           <button
+                              class="tour__filter-btn"
+                              [class.choosen]="date && month && year"
+                              (click)="toggleShowOptionsFiltering('date')"
+                           >
+                              <div class="tour__filter-inner-btn">
+                                 <img alt="" src="../../../assets/icons/calendar.svg" class="date-icon" />
+
+                                 <span *ngIf="date && month && year; else labelWhen">
+                                    {{ convertDateToString(date, month, year) }}
+                                 </span>
+                                 <ng-template #labelWhen>
+                                    <span>When</span>
+                                 </ng-template>
+                              </div>
+                              <button
+                                 (click)="clearDatePicker()"
+                                 *ngIf="date && month && year"
+                                 class="tour__filter-clear-btn"
+                              >
+                                 <img alt="" src="../../../assets/icons/x.svg" class="x-icon small" />
+                              </button>
+                           </button>
+                           <div
+                              class="filter-popper"
+                              *ngIf="isShowOptionsFilter === true && typeFilter === 'date'"
+                              [class.show]="isShowOptionsFilter === true && typeFilter === 'date'"
+                           >
+                              <div class="filter-popper__inner width-auto">
+                                 <div class="filter-popper__calender">
+                                    <app-calender
+                                       [(dayPicked)]="date"
+                                       [(monthPicked)]="month"
+                                       [(yearPicked)]="year"
+                                    ></app-calender>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div
+                           class="tour__filter-component"
+                           appClickOutside
+                           (clickOutside)="handlerClickOutside('location')"
+                        >
+                           <button class="tour__filter-btn" [class.choosen]="isDestinationValid() || isCityValid()">
+                              <div (click)="toggleShowOptionsFiltering('location')" class="tour__filter-inner-btn">
+                                 <img alt="" src="../../../assets/icons/location.svg" class="location-icon" />
+
+                                 <span *ngIf="isDestinationValid(); else labelLocation">
+                                    {{ destination }}
+                                 </span>
+                                 <ng-template #labelLocation>
+                                    <span>Location</span>
+                                 </ng-template>
+                                 <span *ngIf="isCityValid()"> / {{ city }} </span>
+                              </div>
+                              <button
+                                 *ngIf="isDestinationValid() || isCityValid()"
+                                 class="tour__filter-clear-btn"
+                                 (click)="clearLocation()"
+                              >
+                                 <img alt="" src="../../../assets/icons/x.svg" class="x-icon small" />
+                              </button>
+                           </button>
+                           <div
+                              class="filter-popper"
+                              [class.show]="isShowOptionsFilter === true && typeFilter === 'location'"
+                              *ngIf="isShowOptionsFilter === true && typeFilter === 'location'"
+                           >
+                              <div class="filter-popper__inner">
+                                 <div class="filter-popper__location-text">
+                                    <input
+                                       type="text"
+                                       class="filter-popper__input"
+                                       placeholder="Destination"
+                                       [(ngModel)]="destination"
+                                       (input)="onDestinationChange()"
+                                       [ngModelOptions]="{ standalone: true }"
+                                       (focus)="onDestinationFocus()"
+                                    />
+                                    <span class="filter-popper__splash">/</span>
+                                    <input
+                                       type="text"
+                                       class="filter-popper__input"
+                                       placeholder="City"
+                                       [(ngModel)]="city"
+                                       (input)="onCityChange()"
+                                       [ngModelOptions]="{ standalone: true }"
+                                       (focus)="onCityFocus()"
+                                    />
+                                 </div>
+                                 <div class="filter-popper__location-suggest">
+                                    <div
+                                       *ngIf="destinationInputOnfocus === true"
+                                       class="filter-popper__destination-list"
+                                    >
+                                       <div
+                                          *ngFor="let location of locationRender"
+                                          class="filter-popper__item sort"
+                                          (click)="handlerSetDestination(location)"
+                                       >
+                                          {{ location.destination }}
+                                       </div>
+                                       <div *ngIf="locationRender.length === 0" class="filter-popper__alter-text">
+                                          No destination match
+                                       </div>
+                                    </div>
+                                    <div *ngIf="cityInputOnfocus === true" class="filter-popper__city-list">
+                                       <div
+                                          *ngFor="let city of cityRender"
+                                          class="filter-popper__item sort"
+                                          (click)="setCity(city.name)"
+                                       >
+                                          {{ city.name }}
+                                       </div>
+                                       <div *ngIf="cityRender.length === 0" class="filter-popper__alter-text">
+                                          No city match
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Budget -->
+                        <div
+                           class="tour__filter-component"
+                           appClickOutside
+                           (clickOutside)="handlerClickOutside('budget')"
+                        >
+                           <button
+                              class="tour__filter-btn"
+                              (click)="toggleShowOptionsFiltering('budget')"
+                              [class.choosen]="this.endPriceValue > 0"
+                           >
+                              <div class="tour__filter-inner-btn">
+                                 <img alt="" src="../../../assets/icons/budget.svg" class="budget-icon" />
+
+                                 <span *ngIf="endPriceValue > 0; else labelBudget">
+                                    ${{ startPriceValue }} - ${{ endPriceValue }}
+                                 </span>
+                                 <ng-template #labelBudget>
+                                    <span>Budget</span>
+                                 </ng-template>
+                              </div>
+                              <button
+                                 *ngIf="endPriceValue > 0"
+                                 class="tour__filter-clear-btn"
+                                 (click)="clearPriceRange()"
+                              >
+                                 <img alt="" src="../../../assets/icons/x.svg" class="x-icon small" />
+                              </button>
+                           </button>
+                           <div
+                              class="filter-popper"
+                              *ngIf="isShowOptionsFilter === true && typeFilter === 'budget'"
+                              [class.show]="isShowOptionsFilter === true && typeFilter === 'budget'"
+                           >
+                              <div class="filter-popper__inner">
+                                 <div class="filter-popper__budget">
+                                    <div class="filter-popper__price-range">
+                                       <div class="filter-popper__price-value">
+                                          <span class="filter-popper__price-label">
+                                             Min price:
+                                             {{ minPrice }}
+                                          </span>
+                                       </div>
+                                       <div class="filter-popper__price-value">
+                                          <span class="filter-popper__price-label"> Max price: {{ maxPrice }} </span>
+                                       </div>
+                                       <button (click)="applyRangePrice()" class="filter-popper__price-apply-btn">
+                                          Apply
+                                          <img alt="" src="../../../assets/icons/arrow-left.svg" />
+                                       </button>
+                                    </div>
+                                    <div class="price-picker">
+                                       <div class="price-picker__inner">
+                                          <app-price-range-slider
+                                             (dataMinPriceChange)="setInputMinPriceChange($event)"
+                                             (dataMaxPriceChange)="setInputMaxPrice($event)"
+                                             [min]="_MINPRICE"
+                                             [max]="_MAXPRICE"
+                                             [startValue]="minPrice"
+                                             [endValue]="maxPrice"
+                                          ></app-price-range-slider>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Guests -->
+                        <div
+                           class="tour__filter-component"
+                           appClickOutside
+                           (clickOutside)="handlerClickOutside('guest')"
+                        >
+                           <button
+                              (click)="toggleShowOptionsFiltering('guest')"
+                              class="tour__filter-btn"
+                              [class.choosen]="totalGuest > 0"
+                           >
+                              <div class="tour__filter-inner-btn">
+                                 <img alt="" src="../../../assets/icons/face.svg" class="guest-icon" />
+
+                                 <span *ngIf="totalGuest > 0; else labelGuest"> {{ totalGuest }}</span>
+                                 <ng-template #labelGuest>
+                                    <span>Guest </span>
+                                 </ng-template>
+                              </div>
+                              <button
+                                 *ngIf="totalGuest > 0"
+                                 class="tour__filter-clear-btn"
+                                 (click)="clearTotalOfGuest()"
+                              >
+                                 <img alt="" src="../../../assets/icons/x.svg" class="x-icon small" />
+                              </button>
+                           </button>
+                           <div
+                              class="filter-popper"
+                              *ngIf="isShowOptionsFilter === true && typeFilter === 'guest'"
+                              [class.show]="isShowOptionsFilter === true && typeFilter === 'guest'"
+                           >
+                              <div class="filter-popper__inner">
+                                 <div class="filter-popper__list">
+                                    <div class="filter-popper__item sort guest">
+                                       <span>Adult</span>
+                                       <span class="filter-popper__controls">
+                                          <button
+                                             (click)="onTotalGuestChange('ADULT', 'DECREASE')"
+                                             class="filter-popper__wrap-icon"
+                                          >
+                                             <img alt="" src="../../../assets/icons/minus.svg" />
+                                          </button>
+                                          <span class="filter-popper__number">{{ numberOfAdult }}</span>
+                                          <button
+                                             (click)="onTotalGuestChange('ADULT', 'INCREASE')"
+                                             class="filter-popper__wrap-icon"
+                                          >
+                                             <img alt="" src="../../../assets/icons/plus.svg" />
+                                          </button>
+                                       </span>
+                                    </div>
+                                    <div class="filter-popper__item sort guest">
+                                       <span>Youth</span>
+                                       <span class="filter-popper__controls">
+                                          <button
+                                             (click)="onTotalGuestChange('YOUTH', 'DECREASE')"
+                                             class="filter-popper__wrap-icon"
+                                          >
+                                             <img alt="" src="../../../assets/icons/minus.svg" />
+                                          </button>
+                                          <span class="filter-popper__number">{{ numberOfYouth }}</span>
+                                          <button
+                                             (click)="onTotalGuestChange('YOUTH', 'INCREASE')"
+                                             class="filter-popper__wrap-icon"
+                                          >
+                                             <img alt="" src="../../../assets/icons/plus.svg" />
+                                          </button>
+                                       </span>
+                                    </div>
+                                    <div class="filter-popper__item sort guest">
+                                       <span>Children</span>
+                                       <span class="filter-popper__controls">
+                                          <button
+                                             (click)="onTotalGuestChange('CHILDREN', 'DECREASE')"
+                                             class="filter-popper__wrap-icon"
+                                          >
+                                             <img alt="" src="../../../assets/icons/minus.svg" />
+                                          </button>
+                                          <span class="filter-popper__number">{{ numberOfChildren }}</span>
+                                          <button
+                                             (click)="onTotalGuestChange('CHILDREN', 'INCREASE')"
+                                             class="filter-popper__wrap-icon"
+                                          >
+                                             <img alt="" src="../../../assets/icons/plus.svg" />
+                                          </button>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Activity -->
+                        <div
+                           appClickOutside
+                           (clickOutside)="handlerClickOutside('activity')"
+                           class="tour__filter-component"
+                        >
+                           <button
+                              class="tour__filter-btn"
+                              [class.choosen]="activity && activity.trim() !== ''"
+                              (click)="toggleShowOptionsFiltering('activity')"
+                           >
+                              <div class="tour__filter-inner-btn">
+                                 <img alt="" src="../../../assets/icons/bag.svg" class="activity-icon" />
+
+                                 <span *ngIf="activity && activity.trim() !== ''; else labelActivity">
+                                    {{ activity }}</span
+                                 >
+                                 <ng-template #labelActivity>
+                                    <span>Activity</span>
+                                 </ng-template>
+                              </div>
+                              <button
+                                 *ngIf="activity && activity.trim() !== ''"
+                                 class="tour__filter-clear-btn"
+                                 (click)="clearActivity()"
+                              >
+                                 <img alt="" src="../../../assets/icons/x.svg" class="x-icon small" />
+                              </button>
+                           </button>
+                           <div
+                              class="filter-popper"
+                              *ngIf="typeFilter === 'activity' && isShowOptionsFilter === true"
+                              [class.show]="typeFilter === 'activity' && isShowOptionsFilter === true"
+                           >
+                              <div class="filter-popper__inner">
+                                 <div class="filter-popper__list">
+                                    <div
+                                       *ngFor="let act of fakeActivity"
+                                       class="filter-popper__item sort"
+                                       (click)="setActivity(act.name)"
+                                       [class.active]="activity === act.name"
+                                    >
+                                       {{ act.name }}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+
+      <div class="container">
+         <div class="tour__list">
+            <div class="row row-cols-3 row-cols-lg-2 row-cols-md-1 g-3">
+               <div *ngFor="let tourData of fakeTourList | async" class="col">
+                  <div class="tour-component">
+                     <div class="tour-component__inner">
+                        <div (click)="navigateToDetailsTours(tourData.slug)" class="tour-component__wap-thumbnail">
+                           <img alt="" src="{{ tourData.thumbnailUrl }}" class="tour-component__thumbnail" />
+                        </div>
+                        <div class="tour-component__info">
+                           <h3 (click)="navigateToDetailsTours(tourData.slug)" class="tour-component__name">
+                              {{ tourData.name }}
+                           </h3>
+                           <div class="tour-component__details">
+                              <span>{{ tourData.durationDays }} days</span>
+
+                              <span>{{ tourData.totalActivity }} activities</span>
+                           </div>
+                           <div class="tour-component__row">
+                              <span class="tour-component__price">${{ tourData.price }}</span>
+                              <button class="button small">Book Now</button>
+                           </div>
+                           <div class="tour-component__row">
+                              <div class="tour-component__agency" (mouseenter)="showPopper($event, tourData.id)">
+                                 <div class="tour-component__agency-introduction">
+                                    <img
+                                       alt=""
+                                       src="{{ tourData.agency.avatarUrl }}"
+                                       class="tour-component__agency-avatar"
+                                    />
+                                    <h4 class="tour-component__agency-name">
+                                       {{ tourData.agency.name }}
+                                    </h4>
+                                    <img
+                                       class="tour-component__agency-icon"
+                                       alt=""
+                                       *ngIf="tourData.agency.isCertificate === true"
+                                       src="../../../assets/icons/certificate.svg"
+                                    />
+                                 </div>
+                                 <div
+                                    class="tour-component__agency-popper"
+                                    [class.top]="tourData.id === idTourPresentHover && isShowPopperOnBelow === true"
+                                 >
+                                    <div class="tour-component__agency-popper--inner">
+                                       <div class="tour-component__agency-popper--row">
+                                          <div class="tour-component__agency-popper--wrap-avatar">
+                                             <img
+                                                alt=""
+                                                src="{{ tourData.agency.avatarUrl }}"
+                                                class="tour-component__agency-popper--avatar"
+                                             />
+                                          </div>
+                                          <div class="tour-component__agency-popper--info">
+                                             <h3 class="tour-component__agency-popper--name">
+                                                {{ tourData.agency.name }}
+                                                <img
+                                                   *ngIf="tourData.agency.isCertificate === true"
+                                                   alt=""
+                                                   src="../../../assets/icons/certificate.svg"
+                                                   class="tour-component__agency-popper--icon"
+                                                />
+                                             </h3>
+
+                                             <p class="tour-component__agency-popper--location">
+                                                {{ tourData.agency.headOffice }}
+                                             </p>
+                                          </div>
+                                          <button class="button small">View</button>
+                                       </div>
+
+                                       <div class="tour-component__agency-popper--list">
+                                          <div *ngFor="let item of tourData.otherTourInTheSameAgency.slice(0, 3)">
+                                             <img
+                                                alt=""
+                                                src="{{ item.thumbnailUrl }}"
+                                                class="tour-component__agency-popper--thumb-tour"
+                                             />
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="tour-component__stats">
+                                 <div class="tour-component__stats-item">
+                                    <img
+                                       alt=""
+                                       src="../../../assets/icons/heart.svg"
+                                       class="tour-component__stats-icon"
+                                    />
+                                    <span>{{ tourData.likedCounter }}</span>
+                                 </div>
+                                 <div class="tour-component__stats-item">
+                                    <img
+                                       alt=""
+                                       src="../../../assets/icons/personal-walking.svg"
+                                       class="tour-component__stats-icon"
+                                    />
+                                    <span>{{ tourData.numberOfBooking }}</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <nav class="container">
+         <ul>
+            <li *ngIf="currentPage > 1">
+               <span href="#!" (click)="onPageChange(1)">First</span>
+            </li>
+            <li *ngIf="currentPage > 1">
+               <span (click)="onPageChange(currentPage - 1)">Previous</span>
+            </li>
+            <ng-container *ngFor="let page of visiblePages">
+               <li>
+                  <span (click)="onPageChange(page)">{{ page }}</span>
+               </li>
+            </ng-container>
+            <li *ngIf="currentPage < totalPages">
+               <span (click)="onPageChange(currentPage + 1)">Next</span>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+               <span (click)="onPageChange(totalPages)">Last</span>
+            </li>
+         </ul>
+      </nav>
+   </main>
+</default-layout>

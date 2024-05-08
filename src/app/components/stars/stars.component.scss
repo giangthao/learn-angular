@@ -1,0 +1,22 @@
+.wrapper {
+      display: flex;
+      align-items: center;
+      &.small {
+            gap: 3px;
+
+            .star-icon {
+                  width: 16px;
+            }
+      }
+
+      &.large {
+            gap: 6px;
+            .star-icon {
+                  width: 26px;
+            }
+      }
+
+      .star-icon {
+            filter: var(--filter-star-icons);
+      }
+}

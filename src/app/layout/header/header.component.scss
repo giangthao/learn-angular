@@ -1,0 +1,57 @@
+// @use '/src/scss/abstract/' as abstract;
+
+@use '../../../scss/abstract/' as abstract;
+
+.header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      background-color: var(--white);
+      &__inner {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @include abstract.breakpoint(lg) {
+                  padding-top: 12px;
+                  padding-bottom: 12px;
+            }
+      }
+}
+
+.top {
+      &__logo {
+            cursor: pointer;
+
+            img {
+                  @include abstract.breakpoint(lg) {
+                        height: 30px;
+                  }
+            }
+      }
+
+      &__action {
+      }
+
+      &__action-btn {
+            cursor: pointer;
+            border-radius: 8px;
+            background-color: var(--header-button-bg-color);
+            padding: 16px 28px;
+            color: var(--white);
+            text-align: center;
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.14;
+            letter-spacing: 1.34px;
+      }
+
+      &__button-menu {
+            cursor: pointer;
+      }
+}

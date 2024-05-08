@@ -1,0 +1,124 @@
+.calender {
+      width: fit-content;
+      user-select: none;
+      // background-color: red;
+      &__inner {
+            // padding: 6px;
+      }
+
+      &__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+      }
+
+      &__btn {
+            //  background-color: red;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+      }
+
+      &__icon {
+            width: 9px;
+            filter: var(--calender-icon-filter);
+      }
+
+      &__text {
+            font-size: 1.6rem;
+            color: var(--calender-text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+      }
+
+      &__days-of-week,
+      &__day-in-month {
+            display: grid;
+            grid-template-columns: repeat(7, 40px);
+            column-gap: 8px;
+            row-gap: 4px;
+      }
+
+      &__days-of-week {
+            margin-bottom: 10px;
+            span {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--calender-days-of-week-color);
+                  font-family: 'Switzer', sans-serif;
+                  font-size: 1.5rem;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 1.5;
+                  letter-spacing: 1px;
+            }
+      }
+
+      &__day {
+            padding-top: 2px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: var(--calender-day-number-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+
+            transition: color, background-color;
+            transition-duration: 0.3s;
+
+            &.inactive {
+                  color: var(--calender-day-inactive);
+            }
+
+            &:hover {
+                  color: var(--header-button-bg-color);
+                  background-color: var(--caldender-day-hover-bg-color);
+            }
+
+            &.today {
+                  border: 2px solid var(--header-button-bg-color);
+                  position: relative;
+                  &::before {
+                        display: block;
+                        position: absolute;
+                        content: '';
+                        right: 0;
+                        top: 0;
+                        width: 6px;
+                        height: 6px;
+                        background-color: var(--header-button-bg-color);
+                        border-radius: 50%;
+                        border: 2px solid var(--white);
+                        transform: translate(40%, -10%);
+                  }
+            }
+
+            &.picked {
+                  border: 2px solid var(--logo-color);
+                  position: relative;
+                  &::before {
+                        display: block;
+                        position: absolute;
+                        content: '';
+                        right: 0;
+                        top: 0;
+                        width: 6px;
+                        height: 6px;
+                        background-color: var(--logo-color);
+                        border-radius: 50%;
+                        border: 2px solid var(--white);
+                        transform: translate(40%, -10%);
+                  }
+            }
+      }
+}

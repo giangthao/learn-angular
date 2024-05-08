@@ -1,0 +1,21 @@
+<div class="best-tours">
+      <div class="best-tours__inner">
+            <div class="best-tours__header">
+                  <div class="best-tours__row">
+                        <h2 class="heading">Our Best Tour</h2>
+                        <p class="best-tours__desc">
+                              These are also locations where it’s easy to feel healthier, happier and less stressed than
+                              in America. And for more destinations on the Global Retirement Index.
+                        </p>
+                  </div>
+                  <button class="button primary">See All Tours</button>
+            </div>
+            <div class="best-tours__list">
+                  <div class="row row-cols-3 row-cols-lg-2 row-cols-md-1 g-3">
+                        <div class="col" *ngFor="let tour of tours">
+                              <tour-card-details [tourCard]="tour"></tour-card-details>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>

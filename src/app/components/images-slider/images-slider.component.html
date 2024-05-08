@@ -1,0 +1,40 @@
+<div class="images-slider">
+      <div class="images-slider__thumbs">
+            <div class="images-slider__thumbs--grid">
+                  <img
+                        *ngFor="let image of imagesArray.slice(0, 4); let idex = index"
+                        (click)="setShowInCurrentSlide(idex)"
+                        alt=""
+                        src="{{ image }}"
+                  />
+            </div>
+            <button (click)="setShowSlider()" class="images-slider__thumbs--btn">
+                  View All ({{ imagesArray.length }} images)
+            </button>
+      </div>
+      <div *ngIf="showSlider === true" class="slider">
+            <button (click)="hiddenSlider()" class="slider__btn-close">
+                  <img alt="" src="../../../assets/icons/x.svg" />
+            </button>
+
+            <div class="slider__thumb">
+                  <img class="slider__main-image" alt="" src="{{ imagesArray[sliderIndex] }}" />
+                  <button (click)="previousSlide()" class="slider__btn-previous">
+                        <img alt="" src="../../../assets/icons/arow-left-calender.svg" />
+                  </button>
+                  <button (click)="nextSlide()" class="slider__btn-next">
+                        <img alt="" src="../../../assets/icons/arow-right-calendar.svg" />
+                  </button>
+            </div>
+            <div class="slider__images" #imageContainer>
+                  <img
+                        *ngFor="let image of imagesArray; let idx = index"
+                        alt=""
+                        class="slider__image"
+                        [class.active]="idx === sliderIndex"
+                        src="{{ image }}"
+                        (click)="currentSlide(idx)"
+                  />
+            </div>
+      </div>
+</div>

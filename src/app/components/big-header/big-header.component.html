@@ -1,0 +1,41 @@
+<div class="big-header">
+      <div class="big-header__row">
+            <div class="big-header__content">
+                  <h2 class="big-header__heading">Let's Make Your Best Trip Ever</h2>
+                  <p class="big-header__desc">
+                        Plan and book your perfect trip with expert advice, travel tips, destination information and
+                        inspiration from us.
+                  </p>
+                  <div class="big-header__btns">
+                        <button>Discover Now</button>
+                        <button>
+                              <img alt="" src="../../../assets/icons/play.svg" />
+                              Learn more
+                        </button>
+                  </div>
+            </div>
+
+            <div class="big-header__banner">
+                  <img class="big-header__banner-img" alt="" src="../../../assets/images/girl.png" />
+                  <img class="big-header__banner-decoraton" alt="" src="../../../assets/images/shapes.png" />
+
+                  <div class="big-header__banner-total-trip">
+                        <div class="pie animate" style="--p:  {{ timesTraveled }} ;--c: #d3ed6f">
+                              <strong>{{ timesTraveled }}</strong>
+                              <p>Times traveled</p>
+                        </div>
+                        <div class="big-header__banner-inner-card">
+                              <strong>{{ totalTrip }}</strong>
+                              <p>Total trip (momth)</p>
+                        </div>
+                  </div>
+            </div>
+
+            <div class="big-header__stats d-xl-none">
+                  <div class="big-header__stats-list">
+                        <stats-item class="big-header__stats-item" *ngFor="let item of listStats" [statsItem]="item">
+                        </stats-item>
+                  </div>
+            </div>
+      </div>
+</div>

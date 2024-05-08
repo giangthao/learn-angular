@@ -1,0 +1,36 @@
+<header id="header" class="header">
+      <div class="container header__inner top">
+            <button (click)="toggleShowNaigation()" class="top__button-menu d-none d-lg-block">
+                  <img alt="" src="../../../assets/icons/menu.svg" />
+            </button>
+            <a routerLink="/" class="top__logo">
+                  <img alt="Safe Tour" src="../assets/icons/logo.svg" />
+            </a>
+            <nav [class.nav]="true" [class.show]="showNavigation" [class.hide]="!showNavigation">
+                  <button (click)="hideNavigation()" class="nav__back-btn d-none d-lg-block">
+                        <img alt="" src="../../../assets/icons/arrow-left.svg" />
+                  </button>
+
+                  <ul class="nav__list">
+                        <li
+                              *ngFor="let item of listItemsNavigation"
+                              class="nav__item"
+                              (click)="handerClickNavItem(item.title, item.path)"
+                        >
+                              <div class="nav__link" [class.active]="item.active === true">
+                                    <span class="nav__title">{{ item.title }}</span>
+                              </div>
+                        </li>
+                        <li class="nav__item d-none d-md-block">
+                              <div class="nav__link">
+                                    <span routerLink="/register" class="nav__title">Sign Up</span>
+                              </div>
+                        </li>
+                  </ul>
+            </nav>
+            <div class="nav__overlay" (click)="hideNavigation()"></div>
+            <div class="top__action d-md-none">
+                  <button routerLink="/register" class="top__action-btn">Sign Up</button>
+            </div>
+      </div>
+</header>

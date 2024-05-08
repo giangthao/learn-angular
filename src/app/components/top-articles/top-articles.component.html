@@ -1,0 +1,50 @@
+<div class="top-articles">
+      <div class="top-articles__inner">
+            <div class="top-articles__header">
+                  <h2 class="heading center">Articles & Travel Guidings</h2>
+                  <p class="top-articles__desc">
+                        Travel has helped us to understand the meaning of life and it has helped us become better
+                        people. Each time we travel, we see the world with new eyes.
+                  </p>
+            </div>
+            <div class="top-articles__separate">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="124" height="2" viewBox="0 0 124 2" fill="none">
+                        <path
+                              d="M1 1H123"
+                              stroke="#FF7B29"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-dasharray="4 4"
+                        />
+                  </svg>
+            </div>
+            <div class="articles">
+                  <div class="row row-cols-2 row-cols-lg-1">
+                        <div class="col">
+                              <div class="articles__card special">
+                                    <img class="articles__thumb" alt="" src="{{ listBlog[0].thumbnail }}" />
+                                    <div class="articles__row">
+                                          <h3 class="articles__name">
+                                                {{ listBlog[0].title }}
+                                          </h3>
+                                          <p class="articles__date">{{ listBlog[0].createdAt }}</p>
+                                    </div>
+                                    <p class="articles__text">
+                                          {{ listBlog[0].description }}
+                                    </p>
+                              </div>
+                        </div>
+                        <div class="col">
+                              <div class="articles__list">
+                                    <article-details
+                                          *ngFor="let blog of listBlog.slice(1, 4)"
+                                          class="articles__card small"
+                                          [blog]="blog"
+                                    >
+                                    </article-details>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>

@@ -1,0 +1,554 @@
+@use '../../../scss/abstract' as abstract;
+
+.tour-details {
+   &__inner {
+      // padding-top: 30px;
+
+      padding-bottom: 80px;
+   }
+
+   &__type {
+      margin-bottom: 8px;
+      color: var(--tour-details-type-color);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      line-height: 1.1;
+      cursor: pointer;
+      letter-spacing: 0.6px;
+
+      @include abstract.breakpoint(lg) {
+         font-size: 1.4rem;
+      }
+   }
+
+   &__name {
+      font-size: 4.8rem;
+      line-height: 1.1;
+      letter-spacing: 1.3px;
+
+      @include abstract.breakpoint(lg) {
+         font-size: 3.6rem;
+      }
+
+      @include abstract.breakpoint(md) {
+         font-size: 2.6rem;
+      }
+   }
+
+   &__intro {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      &--separate {
+         display: block;
+         width: 6px;
+         height: 6px;
+         background-color: var(--tour-details-separate-color);
+         border-radius: 50%;
+      }
+   }
+
+   &__rating-stats {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      &--value {
+         font-size: 1.7rem;
+         font-weight: 500;
+         line-height: 1.4;
+         color: var(--tour-details-type-color);
+         white-space: nowrap;
+      }
+
+      &--counter {
+         font-size: 1.5rem;
+         text-decoration: underline;
+         cursor: pointer;
+         font-weight: 500;
+         line-height: 1.4;
+         white-space: nowrap;
+      }
+   }
+
+   &__status {
+      background-color: var(--tour-details-status-bg-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--tour-details-status-text-color);
+   }
+
+   &__provider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      &--label {
+         font-size: 1.5rem;
+         cursor: pointer;
+         font-weight: 400;
+         line-height: 1.4;
+         white-space: nowrap;
+      }
+      &--name {
+         font-size: 1.5rem;
+         text-decoration: underline;
+         cursor: pointer;
+         font-weight: 500;
+         line-height: 1.4;
+         white-space: nowrap;
+      }
+   }
+
+   &__cetified {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &--icon {
+         width: 17px;
+      }
+      &--text {
+         font-size: 1.5rem;
+         font-weight: 400;
+         line-height: 1.4;
+         white-space: nowrap;
+      }
+   }
+
+   &__group-description {
+      margin-top: 32px;
+
+      @include abstract.breakpoint(md) {
+         margin-top: 20px;
+      }
+
+      .row {
+         @include abstract.breakpoint(lg) {
+            flex-direction: column;
+         }
+
+         .col-8 {
+            @include abstract.breakpoint(lg) {
+               width: 100%;
+            }
+         }
+
+         .col-4 {
+            @include abstract.breakpoint(lg) {
+               width: fit-content;
+            }
+            @include abstract.breakpoint(md) {
+               width: 100%;
+            }
+         }
+      }
+   }
+
+   &__desc-text {
+      margin-bottom: 18px;
+      color: var(--tour-details-desc-text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.7rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1.56;
+
+      @include abstract.breakpoint(md) {
+         font-size: 1.5rem;
+      }
+   }
+
+   &__label {
+      margin-bottom: 18px;
+      color: var(--tour-details-desc-text);
+      font-family: 'Inter', sans-serif;
+      font-size: 2.2rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.29;
+
+      @include abstract.breakpoint(md) {
+         font-size: 1.9rem;
+      }
+   }
+
+   &__group-price {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border: 1px solid var(--tour-details-group-price-border-color);
+      padding: 24px;
+
+      @include abstract.breakpoint(lg) {
+         padding: 14px;
+      }
+
+      &--inner {
+         display: flex;
+         align-items: center;
+         gap: 12px;
+         justify-content: space-between;
+      }
+
+      &--price-old {
+         text-decoration: line-through;
+         font-size: 1.3rem;
+         font-weight: 500;
+         line-height: 1.5;
+         color: var(--logo-color);
+         letter-spacing: 0.8px;
+      }
+
+      &--column {
+         margin-top: 6px;
+         display: flex;
+         flex-direction: column;
+         gap: 8px;
+
+         @include abstract.breakpoint(lg) {
+            flex-direction: row;
+            align-items: center;
+         }
+      }
+
+      &--label {
+         font-size: 1.6rem;
+         font-family: 'Inter', sans-serif;
+         font-weight: 500;
+         line-height: 1.12;
+         color: var(--tour-details-group-prive-label-text-color);
+
+         @include abstract.breakpoint(md) {
+            font-size: 1.3rem;
+         }
+      }
+
+      &--price-current {
+         font-size: 2.5rem;
+         font-weight: 800;
+         line-height: 1;
+
+         &::first-letter {
+            font-weight: 600;
+            font-size: 1.6rem;
+            margin-right: 4px;
+         }
+      }
+
+      .button {
+         @include abstract.breakpoint(lg) {
+            display: none;
+         }
+      }
+   }
+
+   &__row {
+      .col-8 {
+         @include abstract.breakpoint(lg) {
+            width: 100%;
+         }
+      }
+
+      .col-4 {
+      }
+   }
+
+   &__check-available {
+      margin-top: 24px;
+      //    border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--tour-details-check-border-color);
+
+      &.border {
+         border-color: var(--tour-details-checl-border-active-color);
+      }
+
+      .row {
+         align-items: center;
+         @include abstract.breakpoint(md) {
+            flex-direction: columm;
+            align-items: flex-start;
+            gap: 18px;
+         }
+
+         .col-11 {
+            @include abstract.breakpoint(md) {
+               width: 100%;
+            }
+         }
+      }
+
+      &--header {
+         display: flex;
+         justify-content: space-between;
+         gap: 20px;
+
+         @include abstract.breakpoint(sm) {
+            flex-direction: column;
+            gap: 10px;
+
+            button {
+               margin-left: -12px;
+            }
+         }
+      }
+
+      &--list-item {
+         flex: 1;
+         display: flex;
+         align-items: center;
+         flex-wrap: wrap;
+         gap: 16px;
+      }
+      &--item {
+         border: 1px solid var(--tour-details-status-bg-color);
+         border-radius: 8px;
+         padding: 8px 0;
+         flex: 1;
+         display: flex;
+         gap: 8px;
+         align-items: center;
+         justify-content: center;
+         padding: 10px;
+
+         @include abstract.breakpoint(md) {
+            padding: 8px;
+            justify-content: flex-start;
+         }
+
+         &-icon-user {
+            width: 12px;
+         }
+
+         &-icon-calender {
+            width: 17px;
+         }
+
+         &-icon-user,
+         &-icon-calender {
+            filter: var(--tour-details-icon-filter);
+         }
+         &-value {
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--tour-details-check-value-text-color);
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+
+            @include abstract.breakpoint(md) {
+               font-size: 1.5rem;
+            }
+         }
+
+         &-separate {
+            display: inline-flex;
+            width: 2px;
+            height: 20px;
+            background-color: var(--tour-details-separate-color);
+         }
+      }
+
+      &--form {
+         margin-top: 24px;
+      }
+   }
+}
+
+.toggle-button {
+   &__label {
+      display: inline-block;
+      width: 42px;
+      height: 25px;
+      border-radius: 99px;
+      background-color: var(--toggle-button-bg-color);
+      border: 3px solid var(--toggle-button-bg-color);
+      position: relative;
+
+      transition: background-color, border-color;
+      transition-duration: 0.3s;
+
+      &::before {
+         position: absolute;
+         top: 0;
+         left: 0;
+         content: '';
+         display: inline-block;
+         width: 20px;
+         height: 20px;
+         background-color: var(--white);
+         border-radius: 50%;
+         box-shadow: var(--toggle-button-box-shadow);
+         transition: transform 0.3s;
+      }
+   }
+
+   [type='checkbox']:checked + &__label::before {
+      transform: translateX(calc(100% - 3px));
+   }
+   [type='checkbox']:checked + &__label {
+      background-color: var(--header-button-bg-color);
+      border-color: var(--header-button-bg-color);
+   }
+}
+
+.check-variable-form {
+   display: none;
+   margin-top: 32px;
+
+   @include abstract.breakpoint(md) {
+      margin-top: 0px;
+   }
+
+   &.show {
+      display: block;
+   }
+
+   &__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      @include abstract.breakpoint(sm) {
+         gap: 16px;
+      }
+   }
+
+   &__label {
+      user-select: none;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: calc(327px + 15px + 20px);
+      //   padding: 14px 12px;
+      border-radius: 8px;
+
+      @include abstract.breakpoint(sm) {
+         gap: 12px;
+      }
+
+      img {
+         width: 15px;
+      }
+
+      &-text {
+         font-weight: 500;
+         font-size: 1.5rem;
+         color: var(--check-variable-form-text-color);
+         line-height: 1.2;
+         font-family: 'Inter', sans-serif;
+      }
+
+      &.when {
+         @include abstract.breakpoint(sm) {
+            display: none;
+         }
+      }
+   }
+
+   &__item + &__item {
+      // margin-top: 32px;
+   }
+
+   &__control {
+      position: relative;
+
+      &::before {
+         transform: translateX(calc(50% - 2px));
+         position: absolute;
+         content: '';
+         width: 15px;
+         height: calc(100% + 3px);
+         top: -30px;
+         left: 0;
+         border-left: 2px solid var(--check-variable-control-border-color);
+         border-bottom: 2px solid var(--check-variable-control-border-color);
+         border-bottom-left-radius: 6px;
+      }
+      &.first {
+         margin-top: 14px;
+         &::before {
+            height: 46%;
+            transform: translateX(calc(50% - 2px));
+            position: absolute;
+            content: '';
+            width: 15px;
+
+            top: 0;
+            left: 0;
+            border-left: 2px solid var(--check-variable-control-border-color);
+            border-bottom: 2px solid var(--check-variable-control-border-color);
+            border-bottom-left-radius: 6px;
+         }
+      }
+   }
+
+   &__control.date::before {
+      //  height: 26px;
+      top: 0;
+      height: 100%;
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+
+      @include abstract.breakpoint(sm) {
+         display: none;
+      }
+   }
+
+   &__date {
+      width: fit-content;
+      // background-color: red;
+      margin-left: calc(20px + 18px);
+      padding-top: 10px;
+
+      @include abstract.breakpoint(sm) {
+         margin-left: 0;
+         padding-top: 0;
+      }
+   }
+}
+
+.tour-details {
+   &__experiece-locations {
+      margin-top: 40px;
+
+      .row {
+         .col-8 {
+            @include abstract.breakpoint(lg) {
+               width: 100%;
+            }
+            .row {
+               @include abstract.breakpoint(lg) {
+                  flex-direction: column-reverse;
+               }
+
+               .col-5 {
+                  // background-color: red;
+
+                  @include abstract.breakpoint(md) {
+                     width: 100%;
+                  }
+               }
+
+               .col-7 {
+                  //background-color: blue;
+
+                  @include abstract.breakpoint(md) {
+                     width: 100%;
+                  }
+               }
+            }
+         }
+      }
+   }
+}

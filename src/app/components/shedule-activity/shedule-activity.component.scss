@@ -1,0 +1,29 @@
+.schedule-activity {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+
+      margin-bottom: 24px;
+
+      &__icon {
+            width: 20px;
+            filter: var(--schedule-activity-icon-filter);
+      }
+
+      &__label,
+      &__desc {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+      }
+
+      &__label {
+            font-size: 1.6rem;
+            color: var(--schedule-activity-label-color);
+      }
+      &__desc {
+            margin-top: 10px;
+            font-size: 1.3rem;
+            color: var(--schedule-activity-desc-color);
+      }
+}

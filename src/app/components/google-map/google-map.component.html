@@ -1,0 +1,16 @@
+<google-map
+   class="google-map__wrapper"
+   height="100%"
+   width="100%"
+   [center]="center"
+   [zoom]="zoom"
+   (mapClick)="addMarker($event)"
+   [mapId]="mapId"
+>
+   <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition" [options]="markerOptions">
+      <map-info-window [position]="markerPosition">Information marker</map-info-window>
+   </map-marker>
+</google-map>
+
+<!-- <div>Latitude: {{ display?.lat }}</div>
+<div>Longitude: {{ display?.lng }}</div> -->

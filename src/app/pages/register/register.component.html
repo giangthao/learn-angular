@@ -1,0 +1,163 @@
+<header-only>
+      <div class="register container">
+            <div class="register__inner">
+                  <div
+                        class="register__info"
+                        [class.show]="isShowFormRegisterInMobile"
+                        [class.hide]="!isShowFormRegisterInMobile"
+                  >
+                        <div class="register__wrap">
+                              <h1 class="register__heading">Welcome to Safe Tour</h1>
+                              <p class="register__text">Please enter your details</p>
+                              <div class="register__socials">
+                                    <div class="register__social">
+                                          <img
+                                                alt=""
+                                                src="../../../assets/icons/google.svg"
+                                                class="register__social-icon"
+                                          />
+                                          <p>Log in with Google</p>
+                                    </div>
+                                    <div class="register__social">
+                                          <img
+                                                alt=""
+                                                src="../../../assets/icons/facebook-f.svg"
+                                                class="register__social-icon facebook-f"
+                                          />
+                                          <p>Log in with Facebook</p>
+                                    </div>
+                              </div>
+                              <div class="register__separate">
+                                    <span class="register__line"> </span>
+                                    <span>Or</span>
+                                    <span class="register__line"></span>
+                              </div>
+                              <div class="register__form">
+                                    <form #registerForm="ngForm" class="form">
+                                          <div class="form__group">
+                                                <div class="form__control">
+                                                      <input
+                                                            [(ngModel)]="fullName"
+                                                            placeholder="Full Name"
+                                                            type="text"
+                                                            class="form__input"
+                                                            name="fullName"
+                                                            (input)="onFullNameChange()"
+                                                            (focus)="registerForm.form.markAsTouched()"
+                                                      />
+                                                </div>
+                                                <p
+                                                      *ngIf="fullName.length < 6 && registerForm.form.touched"
+                                                      class="form__error"
+                                                >
+                                                      Full name must be at least 6 characters
+                                                </p>
+                                          </div>
+
+                                          <div class="form__group">
+                                                <div class="form__control">
+                                                      <input
+                                                            [(ngModel)]="phoneNumber"
+                                                            placeholder="Phone number"
+                                                            type="text"
+                                                            class="form__input"
+                                                            name="phoneNumber"
+                                                            required
+                                                      />
+                                                </div>
+                                                <p
+                                                      *ngIf="
+                                                            (phoneNumber.length < 9 || phoneNumber.length > 11) &&
+                                                            registerForm.form.touched
+                                                      "
+                                                      class="form__error"
+                                                >
+                                                      Phone number must be at least 9 - 10 characters
+                                                </p>
+                                          </div>
+                                          <div class="form__group">
+                                                <div class="form__control">
+                                                      <input
+                                                            placeholder="Password"
+                                                            type="password"
+                                                            class="form__input"
+                                                            [(ngModel)]="password"
+                                                            name="password"
+                                                            required
+                                                      />
+                                                </div>
+                                                <p
+                                                      *ngIf="password.length < 4 && registerForm.form.touched"
+                                                      class="form__error"
+                                                >
+                                                      Password at least 4 characters
+                                                </p>
+                                          </div>
+                                          <div class="form__group">
+                                                <div class="form__control">
+                                                      <input
+                                                            placeholder="Confirm password"
+                                                            type="password"
+                                                            class="form__input"
+                                                            [(ngModel)]="confirmPassword"
+                                                            (input)="
+                                                                  (registerForm.form.markAsTouched);
+                                                                  checkPasswordMatch()
+                                                            "
+                                                            name="confirmPassword"
+                                                            required
+                                                      />
+                                                </div>
+                                                <p
+                                                      *ngIf="
+                                                            registerForm.controls['confirmPassword'] &&
+                                                            registerForm.controls['confirmPassword'].hasError(
+                                                                  'passwordMissMatch'
+                                                            ) &&
+                                                            registerForm.form.touched
+                                                      "
+                                                      class="form__error"
+                                                >
+                                                      Confirm password does not match
+                                                </p>
+                                          </div>
+
+                                          <div class="form__row">
+                                                <span class="form__check">
+                                                      <input
+                                                            name="is_accepted"
+                                                            type="checkbox"
+                                                            id="checkbox"
+                                                            [(ngModel)]="isAccepted"
+                                                      />
+                                                </span>
+                                                <label class="form__label" for="checkbox"
+                                                      >I accept with Terms and Policy</label
+                                                >
+                                          </div>
+                                          <div class="form__button">
+                                                <button (click)="register()">Sign Up</button>
+                                          </div>
+                                    </form>
+                              </div>
+                              <div class="register__bottom">
+                                    <p>Already have account?</p>
+                                    <a routerLink="/login">Log in</a>
+                              </div>
+                        </div>
+                  </div>
+                  <div
+                        class="register__intro"
+                        (touchstart)="onTouchStart($event)"
+                        (touchmove)="onTouchMove($event)"
+                        (touchend)="onTouchEnd($event)"
+                  >
+                        <img class="register__img" alt="" src="../../../assets/images/image.png" />
+
+                        <div (click)="toggleShowFormRegisterInMobile()" class="register__go-to-form d-none d-md-flex">
+                              <img alt="" src="../../../assets/icons/dots-and-arrow-right.svg" />
+                        </div>
+                  </div>
+            </div>
+      </div>
+</header-only>

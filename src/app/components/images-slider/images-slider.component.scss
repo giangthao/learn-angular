@@ -1,0 +1,182 @@
+@use '../../../scss/abstract' as abstract;
+
+.images-slider {
+      &__thumbs {
+            margin-top: 24px;
+            position: relative;
+
+            &--btn {
+                  background-color: var(--white);
+                  position: absolute;
+                  top: 18px;
+                  left: 18px;
+                  color: var(--logo-color);
+                  font-size: 1.3rem;
+                  font-family: 'Inter', sans-serif;
+                  line-height: 1.2;
+                  font-weight: 600;
+                  padding: 10px 14px;
+                  border-radius: 20px;
+                  box-shadow: var(--best-destination-star-box-shadow);
+                  cursor: pointer;
+                  letter-spacing: 0.7px;
+            }
+
+            &--grid {
+                  width: 100%;
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, calc((100% - 5 * 10px) / 6));
+                  grid-auto-rows: 240px;
+                  column-gap: 10px;
+                  row-gap: 10px;
+                  grid-auto-flow: dense;
+
+                  @include abstract.breakpoint(lg) {
+                        grid-auto-rows: 190px;
+                  }
+
+                  @include abstract.breakpoint(md) {
+                        grid-template-columns: repeat(auto-fit, calc((100% - 5 * 6px) / 6));
+                        grid-auto-rows: 70px;
+                        column-gap: 6px;
+                        row-gap: 6px;
+                  }
+
+                  img {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                  }
+            }
+
+            &--grid img:nth-child(1) {
+                  grid-column: span 4;
+                  grid-row: span 2;
+
+                  border-top-left-radius: 10px;
+                  border-bottom-left-radius: 10px;
+
+                  @include abstract.breakpoint(md) {
+                        grid-column: span 6;
+                        grid-row: span 4;
+                        border-bottom-left-radius: 0;
+                        border-top-right-radius: 10px;
+                  }
+            }
+            &--grid img:nth-child(2) {
+                  grid-column: span 2;
+                  grid-row: span 1;
+                  border-top-right-radius: 10px;
+                  @include abstract.breakpoint(md) {
+                        border-top-right-radius: 0;
+                        grid-row: span 2;
+                        grid-column: span 4;
+                        border-bottom-left-radius: 10px;
+                  }
+            }
+            &--grid img:nth-child(3) {
+                  grid-column: span 1;
+                  grid-row: span 1;
+
+                  @include abstract.breakpoint(md) {
+                        grid-column: span 2;
+                  }
+            }
+            &--grid img:nth-child(4) {
+                  grid-column: span 1;
+                  grid-row: span 1;
+                  border-bottom-right-radius: 10px;
+
+                  @include abstract.breakpoint(md) {
+                        grid-column: span 2;
+                  }
+            }
+      }
+}
+
+.slider {
+      padding: 40px 40px;
+      position: fixed;
+      z-index: 100;
+      inset: 0 0 0 0;
+      background-color: var(--slider-image-bg-color);
+
+      &__btn-close {
+            position: absolute;
+            top: 30px;
+            right: 60px;
+            cursor: pointer;
+
+            img {
+                  width: 14px;
+
+                  filter: var(--filter-icon-in-slider-image);
+            }
+      }
+
+      &__btn-next {
+            cursor: pointer;
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            img {
+                  filter: var(--filter-icon-in-slider-image);
+            }
+      }
+
+      &__btn-previous {
+            cursor: pointer;
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            img {
+                  filter: var(--filter-icon-in-slider-image);
+            }
+      }
+
+      &__thumb {
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70%;
+            height: 520px;
+      }
+
+      &__main-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+      }
+
+      &__images {
+            max-width: calc(70% - 350px);
+            overflow: hidden;
+            margin: 40px auto 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+      }
+
+      &__image {
+            display: block;
+            flex-shrink: 0;
+            width: 60px;
+            height: 56px;
+            object-fit: cover;
+            border: 1.5px solid var(--slider-image-border-color);
+            opacity: 0.4;
+            border-radius: 6px;
+            cursor: pointer;
+
+            &.active {
+                  opacity: 1;
+                  border-color: var(--silder-image-boder-color-active);
+            }
+      }
+}

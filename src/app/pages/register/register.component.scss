@@ -1,0 +1,197 @@
+@use '../../../scss/abstract/' as abstract;
+
+.register {
+      --header-height-mobile: 56px;
+      --header-height-tablet: 97px;
+
+      min-height: calc(100vh - var(--header-height-tablet));
+      //   background-color: red;
+
+      @include abstract.breakpoint(md) {
+            min-height: calc(100vh - var(--header-height-mobile));
+      }
+
+      @supports (-webkit-touch-callout: none) {
+            min-height: -webkit-fill-available;
+      }
+      &__inner {
+            display: flex;
+
+            align-items: flex-start;
+            min-height: 100%;
+
+            @include abstract.breakpoint(lg) {
+                  align-items: center;
+                  gap: 30px;
+            }
+      }
+
+      &__info {
+            flex: 1;
+            flex-shrink: 0;
+            display: flex;
+            // align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+
+            @include abstract.breakpoint(md) {
+                  background-color: #fff;
+                  position: fixed;
+                  inset: var(--header-height-mobile) 0 0 0;
+                  z-index: 1;
+                  translate: 100%;
+                  transition: translate 0.3s;
+            }
+      }
+
+      &__info.show {
+            @include abstract.breakpoint(md) {
+                  translate: 0;
+            }
+      }
+
+      &__wrap {
+            width: 360px;
+
+            @include abstract.breakpoint(lg) {
+                  width: 300px;
+            }
+      }
+
+      &__heading {
+            color: #010101;
+
+            font-size: 3.3rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.5;
+      }
+
+      &__text {
+            margin-top: 6px;
+            color: #777e90;
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.3;
+      }
+
+      &__socials {
+            margin-top: 18px;
+      }
+
+      &__social {
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #d8dadc;
+            gap: 8px;
+
+            p {
+                  color: #010101;
+                  font-size: 1.6rem;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: 1.5;
+            }
+      }
+
+      &__social + &__social {
+            margin-top: 8px;
+      }
+
+      &__social-icon {
+            display: block;
+            width: 28px;
+            height: 28px;
+
+            &.facebook-f {
+                  margin-left: 16px;
+                  filter: brightness(0) saturate(100%) invert(25%) sepia(90%) saturate(5378%) hue-rotate(197deg)
+                        brightness(96%) contrast(84%);
+            }
+      }
+
+      &__separate {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            span {
+                  color: #777e90;
+                  font-size: 1.4rem;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: 1.7;
+            }
+      }
+
+      &__line {
+            flex: 1;
+            height: 1px;
+            background: #e7ebf0;
+      }
+
+      &__intro {
+            flex: 1;
+            flex-shrink: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+      }
+
+      &__img {
+            display: block;
+            margin-left: auto;
+            width: min(500px, 100%);
+            object-fit: contain;
+
+            @include abstract.breakpoint(lg) {
+                  margin-left: 0;
+            }
+      }
+      &__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 60px;
+
+            p {
+                  color: #777e90;
+                  font-size: 1.4rem;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: 1.7;
+                  margin-right: 4px;
+            }
+
+            a {
+                  color: #010101;
+                  font-size: 1.4rem;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: 1.7;
+                  &:hover {
+                        text-decoration: underline;
+                        cursor: pointer;
+                  }
+            }
+      }
+
+      &__go-to-form {
+            @include abstract.breakpoint(md) {
+                  margin-top: 80px;
+                  img {
+                        width: 58px;
+                  }
+            }
+      }
+}

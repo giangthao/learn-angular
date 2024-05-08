@@ -1,0 +1,34 @@
+<div class="calender">
+   <div class="calender__inner">
+      <div class="calender__top">
+         <button (click)="onPrevMonth()" class="calender__btn">
+            <img alt="" class="calender__icon" src="../../../assets/icons/arow-left-calender.svg" />
+         </button>
+         <span class="calender__text">{{ _monthNames[currentMonth] }} {{ currentYear }}</span>
+         <button (click)="onNextMonth()" class="calender__btn">
+            <img alt="" class="calender__icon" src="../../../assets/icons/arow-right-calendar.svg" />
+         </button>
+      </div>
+      <div class="calender__days-of-week">
+         <span *ngFor="let day of _daysOfWeek"> {{ day }}</span>
+      </div>
+      <div class="calender__day-in-month">
+         <span *ngFor="let p of daysOfPreviosMonth" class="calender__day inactive">{{ p }} </span>
+         <span
+            (click)="setDatePicker(d)"
+            [class.today]="isToday(d) === true"
+            [class.picked]="
+               dayPicked === d &&
+               monthPicked &&
+               yearPicked &&
+               monthPicked === currentMonth &&
+               yearPicked === currentYear
+            "
+            class="calender__day"
+            *ngFor="let d of daysOfMonth"
+         >
+            {{ d }}</span
+         >
+      </div>
+   </div>
+</div>

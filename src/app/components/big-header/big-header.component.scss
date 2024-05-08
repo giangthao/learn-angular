@@ -1,0 +1,296 @@
+@use '../../../scss/abstract/' as abstract;
+
+.big-header {
+      padding-top: 26px;
+
+      @include abstract.breakpoint(md) {
+            padding-top: 16px;
+      }
+      &__row {
+            display: flex;
+            align-items: center;
+            //  gap: 32px;
+
+            @include abstract.breakpoint(lg) {
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 60px;
+            }
+
+            @include abstract.breakpoint(md) {
+                  gap: 30px;
+            }
+      }
+
+      &__content {
+            width: min(618px, 100%);
+      }
+
+      &__heading {
+            width: min(453px, 100%);
+            color: var(--introduction-heading-color);
+            font-size: 6.6rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1.13;
+
+            @include abstract.breakpoint(lg) {
+                  width: 100%;
+                  font-size: 6rem;
+            }
+
+            @include abstract.breakpoint(md) {
+                  font-size: 4rem;
+            }
+      }
+
+      &__desc {
+            width: min(352px, 100%);
+            margin-top: 17px;
+            color: var(--introduction-praragraph-desc);
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.62;
+
+            @include abstract.breakpoint(lg) {
+                  width: 100%;
+            }
+
+            @include abstract.breakpoint(md) {
+                  font-size: 1.4rem;
+            }
+      }
+
+      &__btns {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+
+            @include abstract.breakpoint(md) {
+                  margin-top: 24px;
+            }
+            button {
+                  display: flex;
+                  align-items: center;
+                  font-size: 1.8rem;
+                  font-style: normal;
+                  font-weight: 600;
+                  line-height: 1;
+                  letter-spacing: 0.18px;
+                  cursor: pointer;
+                  gap: 12px;
+
+                  @include abstract.breakpoint(md) {
+                        font-size: 1.6rem;
+                  }
+
+                  img {
+                        width: 64px;
+
+                        @include abstract.breakpoint(md) {
+                              width: 50px;
+                        }
+                  }
+            }
+
+            button:nth-child(1) {
+                  padding: 24px 32px;
+                  color: var(--white);
+                  border-radius: 12px;
+                  background: var(--logo-color);
+                  box-shadow: var(--introduction-button-first-box-sahdow);
+
+                  @include abstract.breakpoint(md) {
+                        padding: 18px;
+                  }
+            }
+
+            button:nth-child(2) {
+                  color: var(--introduction-button-second-color);
+                  background-color: var(--introduction-button-second-bg-color);
+                  padding-right: 24px;
+                  border-radius: 12px;
+                  box-shadow: var(--introduction-button-second-box-shadow);
+
+                  @include abstract.breakpoint(md) {
+                        padding-right: 18px;
+                  }
+            }
+      }
+
+      &__banner {
+            width: min(380px, 100%);
+            flex-shrink: 0;
+            height: 510px;
+            padding-right: 20px;
+            //background-color: orange;
+            position: relative;
+
+            @include abstract.breakpoint(lg) {
+                  width: 100%;
+                  height: calc(50vh);
+            }
+
+            &::after {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  right: 0;
+                  height: 2px;
+                  width: calc(100% + 61px);
+                  background: var(--introduction-line-color);
+                  z-index: 4;
+                  @include abstract.breakpoint(lg) {
+                        width: 100%;
+                  }
+            }
+
+            &-img {
+                  //  background-color: red;
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  position: relative;
+                  z-index: 3;
+
+                  @include abstract.breakpoint(lg) {
+                        width: auto;
+                        margin-left: auto;
+                        margin-right: auto;
+                  }
+            }
+
+            &-decoraton {
+                  //  background-color: orange;
+                  position: absolute;
+                  right: 26px;
+                  top: 0px;
+                  width: 420px;
+                  transform: rotate(-8.772deg);
+
+                  @include abstract.breakpoint(lg) {
+                        right: 0;
+                        top: 50%;
+                        width: 420px;
+                        translate: -35% -50%;
+                  }
+
+                  @include abstract.breakpoint(md) {
+                        width: 340px;
+                        translate: -10% -50%;
+                  }
+            }
+
+            &-total-trip {
+                  padding-top: 21px;
+                  padding-bottom: 26px;
+                  padding-left: 35px;
+                  padding-right: 35px;
+                  position: absolute;
+                  z-index: 4;
+                  bottom: 35px;
+                  left: -134px;
+                  border-radius: 16px;
+                  background: var(--white);
+                  box-shadow: var(--introduction-total-trip-card-box-shadow);
+
+                  @include abstract.breakpoint(xl) {
+                        left: -100px;
+                        border-radius: 8px;
+                  }
+
+                  @include abstract.breakpoint(lg) {
+                        left: 0;
+                  }
+
+                  @include abstract.breakpoint(md) {
+                        padding-top: 10px;
+                        padding-bottom: 18px;
+                        padding-left: 15px;
+                        padding-right: 16px;
+                  }
+            }
+
+            &-inner-card {
+                  margin-top: 18px;
+
+                  @include abstract.breakpoint(md) {
+                        margin-top: 8px;
+                  }
+
+                  strong {
+                        display: block;
+                        color: var(--introduction-total-trip-card-title-color);
+                        text-align: center;
+                        font-size: 2.4rem;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 1;
+
+                        @include abstract.breakpoint(md) {
+                              font-size: 1.8rem;
+                        }
+                  }
+
+                  p {
+                        margin-top: 8px;
+                        color: var(--introduction-total-trip-card-desc-color);
+                        text-align: center;
+                        font-size: 1.2rem;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 1;
+
+                        @include abstract.breakpoint(md) {
+                              font-size: 1rem;
+                        }
+                  }
+            }
+      }
+
+      &__stats {
+            flex: 1;
+            &-list {
+            }
+            &-item {
+                  display: flex;
+                  gap: 16px;
+            }
+            &-item:not(:nth-child(1)) {
+                  margin-top: 48px;
+            }
+
+            &-wrap-icon {
+                  border-radius: 12px;
+                  flex-shrink: 0;
+                  width: 58px;
+                  height: 58px;
+                  background-color: var(--white);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  box-shadow: var(--introduction-stats-card-icon-box-shadow);
+            }
+
+            &-number {
+                  display: block;
+                  color: var(--introduction-stats-card-number-color);
+                  font-size: 3rem;
+                  font-style: normal;
+                  font-weight: 800;
+                  line-height: 1.33;
+            }
+
+            &-type {
+                  color: var(--introduction-stats-card-type-color);
+                  font-size: 1.2rem;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 1.43;
+                  flex-shrink: 0;
+            }
+      }
+}

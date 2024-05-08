@@ -1,0 +1,20 @@
+<ng-container>
+      <div
+            class="wrapper"
+            [class.small]="size && size.trim().toLowerCase() === 'small'"
+            [class.large]="size && size.trim().toLowerCase() === 'large'"
+      >
+            <span *ngFor="let star of starsArray">
+                  <img
+                        class="star-icon"
+                        alt=""
+                        src="../../../assets/icons/star.svg"
+                        *ngIf="star === 1; else halfStar"
+                  />
+
+                  <ng-template #halfStar>
+                        <img class="star-icon" alt="" src="../../../assets/icons/half-star.svg" />
+                  </ng-template>
+            </span>
+      </div>
+</ng-container>

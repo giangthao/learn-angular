@@ -1,0 +1,145 @@
+@use '../../../scss/abstract/' as abstract;
+
+.footer {
+      &__inner {
+            padding-bottom: 60px;
+            padding-top: 40px;
+
+            @include abstract.breakpoint(md) {
+                  padding-bottom: 30px;
+                  padding-top: 40px;
+            }
+      }
+
+      &__grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            align-items: start;
+            justify-content: space-between;
+            column-gap: 30px;
+            row-gap: 30px;
+
+            @include abstract.breakpoint(lg) {
+                  grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            @include abstract.breakpoint(md) {
+                  grid-template-columns: 1fr 1fr;
+            }
+      }
+
+      &__title {
+            margin-bottom: 23px;
+            color: #020000;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1;
+      }
+
+      &__link {
+            color: #676a6c;
+
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+
+            &.mail {
+                  color: #31c3e0;
+
+                  font-size: 1.6rem;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: 1;
+            }
+      }
+
+      &__wrap-link:not(:nth-child(1)) {
+            margin-top: 16px;
+      }
+
+      &__text {
+            max-width: 200px;
+            text-align: left;
+            color: #676a6c;
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.9;
+            margin-bottom: 40px;
+      }
+
+      &__separate {
+            margin-top: 40px;
+            margin-bottom: 50px;
+            width: 100%;
+            height: 1px;
+            background: rgba(210, 208, 192, 0.21);
+
+            @include abstract.breakpoint(md) {
+                  margin-top: 30px;
+                  margin-bottom: 30px;
+            }
+      }
+
+      &__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+      }
+
+      &__navigation {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+      }
+
+      &__nav-item {
+            cursor: pointer;
+            color: #6a6f77;
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.15;
+      }
+
+      &__socials {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+      }
+
+      &__social {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1px solid #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color box-shadow;
+            transition-duration: 0.3s;
+
+            &:hover {
+                  background-color: #fff;
+                  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.2);
+            }
+      }
+
+      &__icon {
+            height: 18px;
+            filter: brightness(0) saturate(100%) invert(89%) sepia(3%) saturate(8%) hue-rotate(349deg) brightness(87%)
+                  contrast(84%);
+      }
+}
+
+.logo {
+      img {
+            @include abstract.breakpoint(lg) {
+                  height: 27px;
+            }
+      }
+}

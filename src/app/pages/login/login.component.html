@@ -1,0 +1,119 @@
+<header-only>
+      <div class="login container">
+            <div class="login__inner">
+                  <div
+                        class="login__info"
+                        [class.show]="isShowFormLoginInMobile"
+                        [class.hide]="!isShowFormLoginInMobile"
+                  >
+                        <div class="login__wrap">
+                              <h1 class="login__heading">Welcome to Safe Tour</h1>
+                              <p class="login__text">Please enter your details</p>
+                              <div class="login__socials">
+                                    <div class="login__social">
+                                          <img
+                                                alt=""
+                                                src="../../../assets/icons/google.svg"
+                                                class="login__social-icon"
+                                          />
+                                          <p>Log in with Google</p>
+                                    </div>
+                                    <div class="login__social">
+                                          <img
+                                                alt=""
+                                                src="../../../assets/icons/facebook-f.svg"
+                                                class="login__social-icon facebook-f"
+                                          />
+                                          <p>Log in with Facebook</p>
+                                    </div>
+                              </div>
+                              <div class="login__separate">
+                                    <span class="login__line"> </span>
+                                    <span>Or</span>
+                                    <span class="login__line"></span>
+                              </div>
+                              <div class="login__form">
+                                    <form #loginForm="ngForm" class="form">
+                                          <div class="form__group">
+                                                <div class="form__control">
+                                                      <input
+                                                            placeholder="Phone number"
+                                                            type="text"
+                                                            class="form__input"
+                                                            name="phoneNumber"
+                                                            required
+                                                            [(ngModel)]="phoneNumber"
+                                                            (input)="onPhoneNumberChange()"
+                                                      />
+                                                </div>
+                                                <p
+                                                      *ngIf="phoneNumber.length < 9 && loginForm.form.touched"
+                                                      class="form__error"
+                                                >
+                                                      Phone number must be at least 9 - 10 characters
+                                                </p>
+                                          </div>
+                                          <div class="form__group">
+                                                <div class="form__control">
+                                                      <input
+                                                            placeholder="Password"
+                                                            type="password"
+                                                            class="form__input"
+                                                            name="password"
+                                                            required
+                                                            [(ngModel)]="password"
+                                                      />
+                                                </div>
+                                                <p
+                                                      *ngIf="password.length < 4 && loginForm.form.touched"
+                                                      class="form__error"
+                                                >
+                                                      Password at least 4 characters
+                                                </p>
+                                          </div>
+                                          <!-- 
+                                          <div class="form__group">
+                                                <p class="form__text">What type of role?</p>
+
+                                                <div class="form__row choose-role">
+                                                      <div class="form__radio">
+                                                            <input type="radio" name="role" id="role-user" />
+                                                            <label for="role-user">User</label>
+                                                      </div>
+
+                                                      <div class="form__radio">
+                                                            <input type="radio" name="role" id="role-admin" />
+                                                            <label for="role-admin">Admin</label>
+                                                      </div>
+                                                </div>
+                                          </div> -->
+
+                                          <div class="form__row">
+                                                <span class="form__check">
+                                                      <input name="is_accepted" type="checkbox" id="checkbox" />
+                                                </span>
+                                                <label class="form__label" for="checkbox"
+                                                      >Remember me for 30 days</label
+                                                >
+                                          </div>
+                                          <div class="form__button">
+                                                <button (click)="login()">Login</button>
+                                          </div>
+                                    </form>
+                              </div>
+                              <div class="login__bottom">
+                                    <p>Don't have an account?</p>
+                                    <a routerLink="/register">Sign Up</a>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="login__intro">
+                        <img class="login__img" alt="" src="../../../assets/images/image.png" />
+
+                        <div (click)="toggleShowFormLoginInMobile()" class="login__go-to-form d-none d-md-flex">
+                              <img alt="" src="../../../assets/icons/dots-and-arrow-right.svg" />
+                        </div>
+                  </div>
+            </div>
+      </div>
+</header-only>

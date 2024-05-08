@@ -1,0 +1,4 @@
+<mat-slider min="{{ min }}" max="{{ max }}" class="custom-slider">
+      <input (input)="dataMinPriceChange.emit(startValue)" [(ngModel)]="startValue" matSliderStartThumb />
+      <input (input)="dataMaxPriceChange.emit(endValue)" [(ngModel)]="endValue" matSliderEndThumb />
+</mat-slider>

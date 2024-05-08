@@ -1,0 +1,16 @@
+<div class="top-destination">
+      <div class="top-destination__inner">
+            <h2 class="heading">Top Destinations</h2>
+            <p class="top-destination__desc">Sost Brilliant reasons Entrada should be your one-stop-shop!</p>
+            <div class="top-destination__masonry-layout">
+                  <div class="masony-wrapper">
+                        <destination-details
+                              class="masony-item"
+                              *ngFor="let d of destinations; index as idex"
+                              [destination]="d"
+                        >
+                        </destination-details>
+                  </div>
+            </div>
+      </div>
+</div>

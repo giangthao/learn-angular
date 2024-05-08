@@ -1,0 +1,237 @@
+<ng-container *ngIf="detailTour$ | async as tour; else noTour">
+   <default-layout>
+      <div class="container tour-details">
+         <div class="tour-details__inner">
+            <!-- Breadcrums -->
+            <div class="breadcrums">
+               <p class="breadcrums__title">Viet Nam</p>
+               <span class="breadcrums__arrow-right">
+                  <img alt="" src="../../../assets/icons/arow-right-calendar.svg" />
+               </span>
+
+               <p class="breadcrums__title">Dong Bac</p>
+               <span class="breadcrums__arrow-right">
+                  <img alt="" src="../../../assets/icons/arow-right-calendar.svg" />
+               </span>
+               <p class="breadcrums__title">Ninh Binh</p>
+            </div>
+
+            <!-- Introduction -->
+            <div class="tour-details__header">
+               <p class="tour-details__type">MULTI-DAY TRIP</p>
+               <h1 class="tour-details__name">{{ tour.name }}</h1>
+
+               <div class="tour-details__intro">
+                  <span class="tour-details__status">New</span>
+                  <div class="tour-details__rating-stats">
+                     <app-stars [numberOfStars]="stars" [size]="'small'"></app-stars>
+                     <span class="tour-details__rating-stats--value">{{ stars }} / 5</span>
+                     <span class="tour-details__rating-stats--counter">114 reviews</span>
+                  </div>
+                  <span class="tour-details__intro--separate"></span>
+                  <div class="tour-details__cetified">
+                     <img class="tour-details__cetified--icon" alt="" src="../../../assets/icons/certificate.svg" />
+                     <span class="tour-details__cetified--text">Cetified by Safe Tour</span>
+                  </div>
+                  <span class="tour-details__intro--separate"></span>
+                  <div class="tour-details__provider">
+                     <span class="tour-details__provider--label">Activitity provider: </span>
+                     <span class="tour-details__provider--name">{{ tour.agency.name }}</span>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Images Slider -->
+            <app-images-slider [imagesArray]="thumbnailArray"></app-images-slider>
+
+            <!-- Description -->
+            <div class="tour-details__group-description">
+               <div class="row">
+                  <div class="col-8">
+                     <div class="tour-details__content">
+                        <h3 class="tour-details__desc-text">
+                           Experience Chicago’s legendary architecture from the best seat in the house: the river. Enjoy
+                           a comprehensive tour with a live fun guide as you navigate through the heart of the city
+                           covering all 3 branches of the Chicago River.
+                        </h3>
+                        <div class="tour-details__shedule-activity">
+                           <div class="tour-details__label">About this tour</div>
+                           <app-shedule-activity
+                              *ngFor="let schedule of featureArray"
+                              [iconUrl]="schedule.icon"
+                              [description]="schedule?.content"
+                              [label]="schedule.title"
+                           ></app-shedule-activity>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-4">
+                     <div class="tour-details__group-price">
+                        <span class="tour-details__group-price--price-old">{{
+                           tour.price + 100 | currency : 'USD'
+                        }}</span>
+                        <div class="tour-details__group-price--inner">
+                           <div class="tour-details__group-price--column">
+                              <span class="tour-details__group-price--label">From</span>
+                              <span class="tour-details__group-price--price-current">{{
+                                 tour.price | currency : 'USD'
+                              }}</span>
+                              <span class="tour-details__group-price--label">per person </span>
+                           </div>
+                           <button (click)="scrollToTop()" class="button medium">Check availability</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Check date validation -->
+            <div #formCheckAvailability class="tour-details__row">
+               <div class="row">
+                  <div class="col-8">
+                     <div [class.border]="checkedInput === true" class="tour-details__check-available">
+                        <div class="row">
+                           <div class="col-1">
+                              <div class="toggle-button">
+                                 <input
+                                    hidden
+                                    class="toggle-button__input-control"
+                                    type="checkbox"
+                                    id="toggle-button"
+                                    [(ngModel)]="checkedInput"
+                                 />
+                                 <label class="toggle-button__label" for="toggle-button"></label>
+                              </div>
+                           </div>
+                           <div class="col-11">
+                              <div class="tour-details__check-available--header">
+                                 <div class="tour-details__check-available--list-item">
+                                    <div class="tour-details__check-available--item">
+                                       <img
+                                          alt=""
+                                          src="../../../assets/icons/user.svg"
+                                          class="tour-details__check-available--item-icon-user"
+                                       />
+
+                                       <span class="tour-details__check-available--item-value">{{
+                                          participantChanges | totalParticipantToString
+                                       }}</span>
+                                    </div>
+
+                                    <div class="tour-details__check-available--item">
+                                       <img
+                                          alt=""
+                                          src="../../../assets/icons/calendar.svg"
+                                          class="tour-details__check-available--item-icon-calender"
+                                       />
+
+                                       <span
+                                          *ngIf="day && month && year; else noDate"
+                                          class="tour-details__check-available--item-value"
+                                          >{{ convertDateToString(day, month, year) }}</span
+                                       >
+                                       <ng-template #noDate>
+                                          <span class="tour-details__check-available--item-value">No date</span>
+                                       </ng-template>
+                                    </div>
+                                 </div>
+                                 <button class="button round underline">
+                                    Check availability
+                                    <img
+                                       class="button-icon arrow-left"
+                                       alt=""
+                                       src="../../../assets/icons/arrow-left.svg"
+                                    />
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                        <div [class.show]="checkedInput === true" class="check-variable-form">
+                           <div class="row">
+                              <div class="col-1"></div>
+                              <div class="col-11">
+                                 <div class="check-variable-form__inner">
+                                    <div class="check-variable-form__item">
+                                       <div class="check-variable-form__label">
+                                          <img alt="" src="../../../assets/icons/face.svg" />
+                                          <span class="check-variable-form__label-text">Guests</span>
+                                       </div>
+                                       <div class="check-variable-form__control first">
+                                          <app-select-participants
+                                             [type]="typeAdult"
+                                             [(numberOfParticipant)]="numberOfAdult"
+                                          ></app-select-participants>
+                                       </div>
+                                       <div class="check-variable-form__control">
+                                          <app-select-participants
+                                             [type]="typeYoung"
+                                             [(numberOfParticipant)]="numberOfYoung"
+                                          ></app-select-participants>
+                                       </div>
+                                       <div class="check-variable-form__control">
+                                          <app-select-participants
+                                             [type]="typeChildren"
+                                             [(numberOfParticipant)]="numberOfChildren"
+                                          ></app-select-participants>
+                                       </div>
+                                    </div>
+                                    <div class="check-variable-form__item">
+                                       <div class="check-variable-form__label when">
+                                          <img alt="" src="../../../assets/icons/pick-icon.svg" />
+                                          <span class="check-variable-form__label-text">When</span>
+                                       </div>
+                                       <div class="check-variable-form__control date">
+                                          <div class="check-variable-form__date">
+                                             <app-calender
+                                                [(dayPicked)]="day"
+                                                [(monthPicked)]="month"
+                                                [(yearPicked)]="year"
+                                             ></app-calender>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="tour-details__experiece-locations">
+               <div class="row">
+                  <div class="col-8">
+                     <div class="tour-details__label">Experience</div>
+                     <div class="row">
+                        <div class="col-5">Colum 5</div>
+                        <div class="col-7" #wrapperGoogleMap>
+                           <app-google-map></app-google-map>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </default-layout>
+</ng-container>
+
+<ng-template #noTour>
+   <header-only>
+      <div class="not-found">
+         <div class="not-found__inner">
+            <div class="not-found__left">
+               <div class="not-found__wrap-img">
+                  <img alt="" src="../../../assets/images/not-found.png" />
+               </div>
+            </div>
+            <div class="not-found__right">
+               <p>Oops</p>
+               <p>Page Not Found</p>
+            </div>
+         </div>
+      </div>
+   </header-only>
+</ng-template>

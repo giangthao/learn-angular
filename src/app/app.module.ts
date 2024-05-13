@@ -12,7 +12,7 @@ import { BigHeaderComponent } from './components/big-header/big-header.component
 import { BestToursComponent } from './components/best-tours/best-tours.component';
 import { TopArticlesComponent } from './components/top-articles/top-articles.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
@@ -41,6 +41,7 @@ import { CapitalizeFirstPipe } from './pipes/capitalize-first.pipe';
 import { TotalParticipantToStringPipe } from './pipes/total-participant-to-string.pipe';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapComponent } from './components/google-map/google-map.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 @NgModule({
    declarations: [
@@ -72,6 +73,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
       CapitalizeFirstPipe,
       TotalParticipantToStringPipe,
       GoogleMapComponent,
+      UploadFileComponent,
    ],
    imports: [
       BrowserModule,
@@ -83,6 +85,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
       MatInputModule,
       MatDatepickerModule,
       GoogleMapsModule,
+      ReactiveFormsModule,
    ],
    providers: [
       HttpClient,
@@ -94,6 +97,9 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
          multi: true,
       },
    ],
-   bootstrap: [AppComponent],
+   bootstrap: [
+      // AppComponent
+      UploadFileComponent,
+   ],
 })
 export class AppModule {}
